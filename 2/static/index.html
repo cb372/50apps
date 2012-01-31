@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Web crawler</title>
+    <script src="/js/jquery-1.7.1.min.js"></script>
+  </head>
+  <body>
+    <div id="form">
+      <script>
+        $(document).ready(function(){
+          $("#myform").submit(function(){
+            $("#status").html("Crawling...")
+            $.ajax({
+              type: "POST",
+              url: "/ajax",
+              data: $(this).serialize(),
+              success: function(data, textStatus, jqXHR) {
+                $("#result").html(data);
+                $("#status").html("")
+              }
+            });
+            return false;
+          });
+        });
+      </script>
+      <form id="myform">
+        <fieldset>
+          <legend>Crawler options</legend>
+          <table>
+            <tr>
+              <td><label for="seed">Seed URL</label></td>
+              <td><input id="seed" name="seed" type="text" size="50" value="http://news.ycombinator.com/news" /></td> 
+            </tr>
+            <tr>
+              <td><label for="depth">Depth</label></td>
+              <td><input id="depth" name="depth" type="text" value="2" /></td>
+            </tr>
+            <tr>
+              <td><label for="keyword">Keyword</label></td>
+              <td><input id="keyword" name="keyword" type="text" size="20" value="Apple" /></td>
+            </tr>
+            <tr>
+              <td><input id="button" type="submit" value="Crawl!" /></td>
+              <td><span id="status"></span></td>
+            </tr>
+          </table>
+      </fieldset>
+      </form>
+    </div>
+    <div id="result">
+    </div>
+  </body>
+</html>
