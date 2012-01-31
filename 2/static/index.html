@@ -4,51 +4,65 @@
   <head>
     <title>Web crawler</title>
     <script src="/js/jquery-1.7.1.min.js"></script>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
   </head>
   <body>
-    <div id="form">
-      <script>
-        $(document).ready(function(){
-          $("#myform").submit(function(){
-            $("#status").html("Crawling...")
-            $.ajax({
-              type: "POST",
-              url: "/ajax",
-              data: $(this).serialize(),
-              success: function(data, textStatus, jqXHR) {
-                $("#result").html(data);
-                $("#status").html("")
-              }
-            });
-            return false;
-          });
-        });
-      </script>
-      <form id="myform">
-        <fieldset>
-          <legend>Crawler options</legend>
-          <table>
-            <tr>
-              <td><label for="seed">Seed URL</label></td>
-              <td><input id="seed" name="seed" type="text" size="50" value="http://news.ycombinator.com/news" /></td> 
-            </tr>
-            <tr>
-              <td><label for="depth">Depth</label></td>
-              <td><input id="depth" name="depth" type="text" value="2" /></td>
-            </tr>
-            <tr>
-              <td><label for="keyword">Keyword</label></td>
-              <td><input id="keyword" name="keyword" type="text" size="20" value="Apple" /></td>
-            </tr>
-            <tr>
-              <td><input id="button" type="submit" value="Crawl!" /></td>
-              <td><span id="status"></span></td>
-            </tr>
-          </table>
-      </fieldset>
-      </form>
-    </div>
-    <div id="result">
-    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span8 offset4">
+          <div class="page-header">
+            <h1>Web crawler</h1>
+          </div>
+          <div id="form">
+            <script>
+              $(document).ready(function(){
+                $("#myform").submit(function(){
+                  $("#status").html("Crawling...")
+                  $.ajax({
+                    type: "POST",
+                    url: "/ajax",
+                    data: $(this).serialize(),
+                    success: function(data, textStatus, jqXHR) {
+                      $("#result").html(data);
+                      $("#status").html("")
+                    }
+                  });
+                  return false;
+                });
+              });
+            </script>
+            <form id="myform">
+              <fieldset>
+                <legend>Crawler options</legend>
+                <div class="clearfix">
+                  <label for="seed">Seed URL</label>
+                  <div class="input">
+                    <input id="seed" name="seed" type="text" size="50" value="http://news.ycombinator.com/news" /> 
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <label for="depth">Depth</label>
+                  <div class="input">
+                    <input id="depth" name="depth" type="text" value="2" />
+                  </div>
+                </div>
+                <div class="clearfix">
+                  <label for="keyword">Keyword</label>
+                  <div class="input">
+                    <input id="keyword" name="keyword" type="text" size="20" value="Apple" />
+                  </div>
+                </div> 
+              </fieldset>
+              <div class="actions">
+                <input id="button" type="submit" class="btn primary" value="Crawl!" />
+                <span id="status"></span>
+              </div>    
+            </form>
+          </div>
+          <div id="result">
+          </div>
+        </div><!--span8 offset4-->
+      </div><!--row-->
+    </div><!--container-->
   </body>
 </html>
