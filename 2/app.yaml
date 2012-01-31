@@ -19,5 +19,5 @@ handlers:
   static_dir: css
 
 - url: /ajax
-  script: helloworld.py
+  script: ajaxhandler.py
 
