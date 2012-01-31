@@ -32,11 +32,11 @@ class Crawler:
         else:
             for url in urls:
                 if url not in self.visited:
-                    links = self.scrape(url)
+                    links = self.scrape(url, depth)
                     self.crawlRecursive(links, depth+1)
             return
 
-    def scrape(self, url):
+    def scrape(self, url, depth):
         logging.debug("Scraping %s" % url)
         # Mark URL as visited, even if we are going to choke on it
         self.visited.add(url)
@@ -46,7 +46,7 @@ class Crawler:
                 html = unicode(result.content, 'utf-8')
                 # Simple substring search of the raw HTML
                 if html.find(self.keyword) > -1:
-                    self.matched.add((url, level))
+                    self.matched.add((url, depth))
                 # Use Beautiful Soup to extract links
                 soup = BeautifulSoup(html)
                 links = [urljoin(url, unicode(link['href'])) for link in soup.findAll('a')]
