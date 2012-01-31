@@ -1,4 +1,4 @@
-application: helloworld
+application: 50apps-app2-crawler
 version: 1
 runtime: python
 api_version: 1
