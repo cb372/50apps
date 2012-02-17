@@ -68,10 +68,10 @@
              }
            });
 
-          div.html(input);
-          input.focus();
-          input.select();
-        }
+        div.html(input);
+        input.focus();
+        input.select();
+      }
 
       function saveNotes() {
         var notes = [];
@@ -113,18 +113,18 @@
 
       $(document).ready(function(){
         if (window.localStorage.getItem('notes') == null) {
-          var sample = {content: 'Click to edit...', x: 100, y: 200};
+          var sample = {content: 'Click to edit...', x: 200, y: 200};
           var notes = [sample];
           window.localStorage.setItem('notes', JSON.stringify(notes));
-          } else {
-          var notes = JSON.parse(window.localStorage.getItem('notes'));
-          $.map(notes, function(note, i){
-            createNote(note.content, note.x, note.y)
-          });
-        }
+        } 
+        var notes = JSON.parse(window.localStorage.getItem('notes'));
+        $.map(notes, function(note, i){
+          createNote(note.content, note.x, note.y)
+        });
 
         $('.doubleclickable').dblclick(function(event) {
           createNote('Click to edit...', event.pageX, event.pageY);
+          saveNotes();
         });
       });
 
